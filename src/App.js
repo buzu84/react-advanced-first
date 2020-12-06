@@ -7,7 +7,7 @@ import NotFound from "./components/NotFound";
 
 export default function App() {
   const [users, setUsers] = useState();
-  console.log(users);
+  // console.log(users);
   return (
     <Router>
       <Switch>
@@ -15,7 +15,9 @@ export default function App() {
           <UserList setUsers={setUsers} />
         </Route>
         <Route path="/id">
-          <UserDetails users={users} />
+          {users ? <UserDetails users={users} /> : <>loading...</>}
+          // nie dziala!!! asynchroniczne i nie widzi users, jak to ominac?
+          // poza tym zeby przekazac indeks tablicy jakon sciezke url...?
         </Route>
         <Route component={NotFound} />
       </Switch>

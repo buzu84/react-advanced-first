@@ -6,6 +6,7 @@ import Spinner from "../Spinner";
 const UserList = props => {
   const [users, setUsers] = useState();
   const [error, setError] = useState();
+  const [choosenUser, setChoosenUser] = useState();
   const url = "https://randomuser.me/api/?results=10";
 
   useEffect(() => {
@@ -18,22 +19,23 @@ const UserList = props => {
   }, []);
 
   useEffect(() => {
-
     if (typeof props.setUsers === "function") {
       props.setUsers(users);
     }
-
   }, [users])
 
   if (error) {
     return <p>There was an error with fetching: {error}</p>;
   }
 
+  console.log(choosenUser);
+
+
   return (
     <>
       {users ? (
         users.map((user) => {
-          return <User key={user.login.uuid} user={user} />;
+          return <User key={user.login.uuid} user={user} handleChoosenUser={setChoosenUser}/>;
         })
       ) : (
         <div className="spinner-container">
