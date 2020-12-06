@@ -10,7 +10,8 @@ const User = ({ user }) => {
           <img
             className="rounded img-fluid mx-auto d-block"
             src={picture.large}
-            alt="Responsive image"
+            alt="image"
+
           />
         </li>
         <li className="list-group-item bg-secondary">
