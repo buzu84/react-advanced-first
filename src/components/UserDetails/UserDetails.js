@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserDetails = () => {
+const UserDetails = props => {
   return <>User details component</>;
 };
 

@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./styles.css";
 import UserList from "./components/UserList";
 import UserDetails from "./components/UserDetails";
 import NotFound from "./components/NotFound";
 
 export default function App() {
-  // const [choosenUser, setChoosenUser] = useState();
+  const [users, setUsers] = useState();
+  console.log(users);
   return (
-    <HashRouter>
+    <Router>
       <Switch>
-        <Route exact path="/" component={UserList} />
-        <Route path="/:id" component={UserDetails} />
+        <Route exact path="/">
+          <UserList setUsers={setUsers} />
+        </Route>
+        <Route path="/id">
+          <UserDetails users={users} />
+        </Route>
         <Route component={NotFound} />
       </Switch>
-    </HashRouter>
+    </Router>
   );
 }
