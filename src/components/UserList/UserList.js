@@ -6,7 +6,7 @@ import Spinner from "../Spinner";
 import UserDetails from "../UserDetails";
 import NotFound from "../NotFound";
 
-const UserList = props => {
+const UserList = () => {
   const [users, setUsers] = useState();
   const [error, setError] = useState();
   const [chosenUser, setChosenUser] = useState();
@@ -21,11 +21,6 @@ const UserList = props => {
       });
   }, []);
 
-  useEffect(() => {
-    if (typeof props.setUsers === "function") {
-      props.setUsers(chosenUser);
-    }
-  }, [users])
 
   if (error) {
     return <p>There was an error with fetching: {error}</p>;
