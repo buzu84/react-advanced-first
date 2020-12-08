@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import ReactPlaceholder from "react-placeholder";
+import "react-placeholder/lib/reactPlaceholder.css";
 
 import User from "../User";
 import Spinner from "../Spinner";
@@ -10,12 +12,18 @@ const UserList = () => {
   const [users, setUsers] = useState();
   const [error, setError] = useState();
   const [chosenUser, setChosenUser] = useState();
+  const [ready, setReady] = useState(false);
   const url = "https://randomuser.me/api/?results=10";
 
   useEffect(() => {
     fetch(`${url}`)
       .then((response) => response.json())
       .then((response) => setUsers(response.results))
+      .then(() => {
+          setTimeout(() => {
+            setReady(true);
+          }, 1500);
+        })
       .catch((error) => {
         setError(error);
       });
@@ -34,7 +42,15 @@ const UserList = () => {
             users.map(user => {
               return (
                 <Link to={`/users/${user.login.uuid}`} key={user.login.uuid}>
-                  <User key={user.login.uuid} user={user} handleChosenUser={setChosenUser}/>
+                  <ReactPlaceholder
+                    showLoadingAnimation
+                    ready={ready}
+                    type="media"
+                    style={{ flexBasis: 300, margin: 30 }}
+                    key={user.login.uuid}
+                    >
+                    <User key={user.login.uuid} user={user} handleChosenUser={setChosenUser}/>
+                  </ReactPlaceholder>
                 </Link>
               )
             })

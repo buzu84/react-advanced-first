@@ -1,5 +1,6 @@
 import React from "react";
 import history from "../../history";
+import mySvg from "../../assets/Decoration.svg";
 
 const UserDetails = props => {
 
@@ -10,10 +11,11 @@ const UserDetails = props => {
 
   if (props.chosenUser === undefined) {
     return (
-      <>
+      <div className="no-path-container">
         <h1>No chosen user</h1>
-        <button onClick={pageReload}>Users</button>
-      </>
+        <img src={mySvg} alt="decoration" />
+        <button className="go-back-button" onClick={pageReload}>Users</button>
+      </div>
     )
   }
 

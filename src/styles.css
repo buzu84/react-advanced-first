@@ -1,6 +1,12 @@
-.App {
-  font-family: sans-serif;
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
   text-align: center;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 }
 .spinner-container {
   width: 100vw;
@@ -15,4 +21,38 @@
 .list-group:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+
+.no-path-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: background 250ms ease-in-out,
+                   transform 150ms ease;
+}
+
+.go-back-button {
+   display: block;
+   margin: 0 auto;
+   font-size: 1rem;
+   font-weight: 200;
+   background: #FFFFFF;
+   border: black 0.75px solid;
+   width: 10rem;
+   margin: 2rem 0;
+   border-radius: 1em;
+   padding: 10px 25px;
+   cursor: pointer;
+}
+
+.go-back-button:focus {
+  outline: none;
+}
+.go-back-button:hover,
+.go-back-button:focus {
+  background: #ffa07ab8;
 }

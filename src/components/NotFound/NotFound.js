@@ -1,5 +1,6 @@
 import React from "react";
 import history from "../../history";
+import mySvg from "../../assets/Decoration.svg";
 
 const NotFound = () => {
   const pageReload = () => {
@@ -7,10 +8,11 @@ const NotFound = () => {
     window.location.reload();
   }
   return (
-    <>
+    <div className="no-path-container">
       <h1>404- path not found</h1>
-      <button onClick={pageReload}>Users</button>
-    </>
+      <img src={mySvg} alt="decoration" />
+      <button className="go-back-button" onClick={pageReload}>Users</button>
+    </div>
   )
 }
 
