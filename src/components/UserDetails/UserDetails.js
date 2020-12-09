@@ -1,9 +1,9 @@
 import React from "react";
 import history from "../../history";
 import mySvg from "../../assets/Decoration.svg";
+import { Map, Marker, TileLayer, Popup } from "react-leaflet";
 
 const UserDetails = props => {
-
   const pageReload = () => {
     history.push('/');
     window.location.reload();
@@ -16,51 +16,54 @@ const UserDetails = props => {
         <img src={mySvg} alt="decoration" />
         <button className="go-back-button" onClick={pageReload}>Users</button>
       </div>
-    )
-  }
-
-  if (props.chosenUser) {
-    const { registered, name, location, email, picture } = props.chosenUser;
-    const formattedDate = new Date(registered.date).toLocaleDateString();
-
-    return (
-
-      <div className="container text-white">
-        <ul className="list-group mb-3 shadow rounded">
-          <li className="list-group-item bg-secondary">
-            <img
-              className="rounded img-fluid mx-auto d-block"
-              src={picture.large}
-              alt="user"
-            />
-          </li>
-          <li className="list-group-item bg-secondary">
-            <strong className="font-weight-bold">Name: </strong>
-            {name.first ? name.first : "no name"}
-          </li>
-          <li className="list-group-item bg-secondary">
-            <strong className="font-weight-bold">Surname: </strong>
-            {name.last ? name.last : "no surname"}
-          </li>
-          <li className="list-group-item bg-secondary">
-            <strong className="font-weight-bold">Address: </strong>
-            {location
-              ? `${location.street.name}, ${location.city}`
-              : "no address"}
-          </li>
-          <li className="list-group-item bg-secondary">
-            <strong className="font-weight-bold">E-mail: </strong>
-            {email}
-          </li>
-          <li className="list-group-item bg-secondary">
-            <strong className="font-weight-bold">registered: </strong>
-            {formattedDate}
-          </li>
-        </ul>
-      </div>
     );
   }
 
+  if (props.chosenUser) {
+    const { name, location } = props.chosenUser;
+    const position = [parseFloat(location.coordinates.latitude), parseFloat(location.coordinates.longitude)];
+    return (
+      <>
+        <div className="container text-white">
+          <ul className="list-group mb-3 shadow rounded">
+            <li className="list-group-item bg-secondary font-weight-bold">
+              User Details:
+            </li>
+            <li className="list-group-item bg-secondary">
+              Hi, My name is{` `}
+              {name.first ? name.first : "no name"}
+            </li>
+
+            <li className="list-group-item bg-secondary">
+              I am from{` `}
+              {location ? `${location.city}`: "no address"}
+            </li>
+          </ul>
+        </div>
+        <div id="mapid">
+          <Map center={position} zoom={4}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={position}>
+              <Popup>
+                Latitude: {position[0]}, Longitude: {position[1]}<br></br>
+                This geo is NOT in {location.city}, {location.country} - random API users<br></br>
+                Lat & Long shown properly
+                <a href="https://www.maps.ie/coordinates.html" target="_blank" rel="noreferrer"><br></br>
+                Check it out HERE
+                </a>
+              </Popup>
+            </Marker>
+          </Map>
+          <img className="pt-4" src={mySvg} alt="decoration" />
+          <button className="go-back-button" onClick={pageReload}>Go back</button>
+        </div>
+      </>
+    );
+  }
 };
+
 
 export default UserDetails;

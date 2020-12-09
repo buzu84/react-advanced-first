@@ -11,7 +11,9 @@
     "react-scripts": "4.0.1",
     "react-spinners": "^0.8.3",
     "react-router-dom": "^5.2.0",
-    "react-placeholder": "4.0.3"
+    "react-placeholder": "4.0.3",
+    "react-leaflet": "2.7.0",
+    "leaflet": "1.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
