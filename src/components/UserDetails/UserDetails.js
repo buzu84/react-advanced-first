@@ -2,6 +2,7 @@ import React from "react";
 import history from "../../history";
 import mySvg from "../../assets/Decoration.svg";
 import { Map, Marker, TileLayer, Popup } from "react-leaflet";
+import { Link } from "react-router-dom";
 
 const UserDetails = props => {
   const pageReload = () => {
@@ -20,11 +21,12 @@ const UserDetails = props => {
   }
 
   if (props.chosenUser) {
-    const { name, location } = props.chosenUser;
+    const { name, location, login } = props.chosenUser;
     const position = [parseFloat(location.coordinates.latitude), parseFloat(location.coordinates.longitude)];
     return (
       <>
         <div className="container text-white">
+        <Link to={`/`}>
           <ul className="list-group mb-3 shadow rounded">
             <li className="list-group-item bg-secondary font-weight-bold">
               User Details:
@@ -39,6 +41,7 @@ const UserDetails = props => {
               {location ? `${location.city}`: "no address"}
             </li>
           </ul>
+          </ Link>
         </div>
         <div id="mapid">
           <Map center={position} zoom={4}>
